@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from 'react'
+import { useState, createContext, useEffect } from 'react'
 import axios from 'axios'
-import { USER_PER_PAGE } from '../utils/constants'
-
+import { USER_PER_PAGE } from './../utils/constant';
 export const UsersContext = createContext()
 const UsersProvider = ({ children }) => {
     const [users, setUsers] = useState([])
@@ -9,17 +8,19 @@ const UsersProvider = ({ children }) => {
     const [pages, setPages] = useState(1)
     const [totalPages, setTotalPages] = useState(0)
 
-    const fetchAllUsers = async () => {
-        setLoading(true)
+    console.log(users);
+
+    const fetchUsers = async () => {
         const response = await axios.get('https://randomuser.me/api/?page=1&results=50&nat=us')
-        const data = await response.data.results
-        setUsers(data);
-        setTotalPages(Math.ceil(data.length / USER_PER_PAGE))
+        const data =await response.data.results
+        setUsers(data)
         setLoading(false)
+        setTotalPages(Math.ceil(data.length / USER_PER_PAGE))
+
     }
 
     useEffect(() => {
-        fetchAllUsers()
+        fetchUsers()
     }, [])
 
     const value = {
@@ -28,7 +29,8 @@ const UsersProvider = ({ children }) => {
         pages,
         totalPages,
         setUsers,
-        setPages
+        setPages,
+
     }
     return (
         <UsersContext.Provider value={value}>

@@ -1,24 +1,18 @@
-import { useContext, useState } from 'react'
-import { UsersContext } from '../context/UsersContext'
+import React, { useContext } from 'react'
+import { UsersContext } from './../context/UsersContext';
 
 const Pagination = () => {
-    const { totalPages, setPages } = useContext(UsersContext)
-    const [activeTag, setActiveTag] = useState(1)
+    const { pages, totalPages, setPages } = useContext(UsersContext)
+    const pagination = [...Array(totalPages).keys()].map((num) => num + 1)
 
-    const paginations = [...Array(totalPages).keys()].map(num => num + 1)
-
-    const handleBtnClick = (num) => {
+    const handlePaginate = (num) => {
         setPages(num)
-        setActiveTag(num)
     }
 
-    return (
-        <div> {
-            paginations.map((page) => (
-                <button className={`${activeTag === page ? 'active' : undefined} button`} onClick={() => handleBtnClick(page)} key={page}>{page}</button>
-            ))}
-        </div>
-    )
+    return pagination.map((page) => (
+        <button className={`${pages === page ? 'active' : undefined} button`} onClick={() => handlePaginate(page)} key={page}>{page}</button>
+    ))
+
 }
 
 export default Pagination
