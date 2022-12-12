@@ -70,8 +70,10 @@ const App = () => {
 
     const handleSearch = (e) => {
         const matchedUsers = data.filter((user) => (
-            `${user.first_name} ${user.last_name}`.toLowerCase().includes(e.target.value.toLowerCase()) &&
-            `${user.first_name} ${user.last_name}`.toLowerCase().startsWith(e.target.value.toLowerCase())
+            `${user.first_name} ${user.last_name}`.toLowerCase().includes(e.target.value.toLowerCase()) 
+            //OR
+            // `${user.first_name}`.toLowerCase().startsWith(e.target.value.toLowerCase()) ||
+           // `${user.last_name}`.toLowerCase().startsWith(e.target.value.toLowerCase()) 
         ))
         setUsers(matchedUsers)
         setSearchPhrase(e.target.value)
