@@ -32,6 +32,7 @@ const Header = () => {
                             onChange={handleInputChange}
                             value={value}
                             onKeyDown={handleInputKeyDown}
+                            autoFocus
                         />
                         <button
                             className='bg-blue-400 border-l px-4 py-2 text-white'
